@@ -210,7 +210,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4106194654363164, guid: 5dff20a75e58394429a498c795b5f077, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4106194654363164, guid: 5dff20a75e58394429a498c795b5f077, type: 2}
       propertyPath: m_LocalPosition.z
@@ -239,6 +239,16 @@ Prefab:
     - target: {fileID: 54447620447075854, guid: 5dff20a75e58394429a498c795b5f077,
         type: 2}
       propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54447620447075854, guid: 5dff20a75e58394429a498c795b5f077,
+        type: 2}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54447620447075854, guid: 5dff20a75e58394429a498c795b5f077,
+        type: 2}
+      propertyPath: m_AngularDrag
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
