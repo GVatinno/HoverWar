@@ -213,8 +213,8 @@ GameObject:
   - component: {fileID: 307683889}
   - component: {fileID: 307683887}
   - component: {fileID: 307683888}
-  - component: {fileID: 307683891}
   - component: {fileID: 307683890}
+  - component: {fileID: 307683891}
   m_Layer: 8
   m_Name: HoverModel
   m_TagString: Untagged
@@ -286,7 +286,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.0000005, z: 1.0000002}
+  m_Size: {x: 1, y: 1.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &307683889
 MeshFilter:
@@ -306,7 +306,7 @@ Rigidbody:
   m_Mass: 100
   m_Drag: 2
   m_AngularDrag: 2
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 2026320681}
   - component: {fileID: 2026320685}
   m_Layer: 0
-  m_Name: hoverCamera
+  m_Name: HoverCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,13 +797,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2026320680}
-  m_LocalRotation: {x: 0.3406257, y: 0, z: 0, w: 0.940199}
-  m_LocalPosition: {x: 0, y: 10.81, z: 42.36}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 39.83, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2026320685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,8 +815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a4d2d26f3f81d45a03a02b38540050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 307683885}
-  damping: 0.8
+  m_target: {fileID: 307683885}
+  m_offset: {x: 0, y: 5, z: -10}
 --- !u!1 &2087114168
 GameObject:
   m_ObjectHideFlags: 0

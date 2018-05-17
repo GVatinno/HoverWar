@@ -43,6 +43,6 @@ public class HovercraftController : MonoBehaviour {
 	void FixedUpdate()
 	{
 		rigidBody.AddRelativeForce (transform.forward * moveForceMagnitude);
-		rigidBody.AddRelativeTorque (transform.up * turnForceMagnitude);
+		rigidBody.AddRelativeTorque (Vector3.right * turnForceMagnitude);
 	}
 }

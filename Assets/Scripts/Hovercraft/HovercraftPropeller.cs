@@ -26,17 +26,17 @@ public class HovercraftPropeller : MonoBehaviour {
 		if (isCollingWithGround)
 		{
 			float upForceDistanceFactor = 1.0f - groundHit.distance / hovercraft.MaxHeightToGround;
-			rigidBody.AddForceAtPosition (Vector3.up * upForceDistanceFactor * hovercraft.PropellerForceFactor, transform.position);
+			//rigidBody.AddForceAtPosition (Vector3.up * upForceDistanceFactor * hovercraft.PropellerForceFactor, transform.position);
 		
 		} else
 		{
-			if (hovercraft.transform.position.y > transform.position.y)
-			{
-				rigidBody.AddForceAtPosition (transform.up * -hovercraft.PropellerForceFactor, transform.position);
-			} else
-			{
-				rigidBody.AddForceAtPosition (transform.up * hovercraft.PropellerForceFactor, transform.position);
-			}
+//			if (hovercraft.transform.position.y > transform.position.y)
+//			{
+//				rigidBody.AddForceAtPosition (transform.up * -hovercraft.PropellerForceFactor, transform.position);
+//			} else
+//			{
+//				rigidBody.AddForceAtPosition (transform.up * hovercraft.PropellerForceFactor, transform.position);
+//			}
 		}
 	}
 }
