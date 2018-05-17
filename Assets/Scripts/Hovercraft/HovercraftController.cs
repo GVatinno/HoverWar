@@ -5,9 +5,9 @@ using UnityEngine;
 public class HovercraftController : MonoBehaviour {
 
 	private Rigidbody rigidBody;
-	private const float moveForceFactor = 30.0f;
-	private const float turnForceFactor = 0.8f;
-	private const float propellerForceFactor = 60.0f;
+	private const float moveForceFactor = 5000.0f;
+	private const float turnForceFactor = 500.0f;
+	private const float propellerForceFactor = 1000.0f;
 	private const float maxHeightToGround = 3.0f;
 
 
@@ -28,6 +28,7 @@ public class HovercraftController : MonoBehaviour {
 
 	// TODO REFACTOR THIS IN SEPARATING INPUT FROM CONTROLLER
 	// TODO USING SCRIPTABLE OBJECT
+	// TODO USE m_ FOR PRIVATE MEMBERS AND LOWER CASE PROPERTY
 
 	void Awake () {
 		
@@ -35,8 +36,8 @@ public class HovercraftController : MonoBehaviour {
 	}
 
 	void Update () {
-		moveForceMagnitude = Input.GetAxis ("Vertical") * moveForceFactor;
-		turnForceMagnitude = Input.GetAxis ("Horizontal") * turnForceFactor;
+		moveForceMagnitude = Input.GetAxis ("Vertical") * -moveForceFactor;
+		turnForceMagnitude = Input.GetAxis ("Horizontal") * -turnForceFactor;
 	}
 
 	void FixedUpdate()

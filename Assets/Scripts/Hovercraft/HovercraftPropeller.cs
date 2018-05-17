@@ -7,7 +7,7 @@ public class HovercraftPropeller : MonoBehaviour {
 	private Rigidbody rigidBody;
 	private HovercraftController hovercraft;
 	private int groundLayerMask;
-
+	private float m_propulsorYOffset;
 
 	void Awake () {
 		
@@ -23,9 +23,20 @@ public class HovercraftPropeller : MonoBehaviour {
 		Ray ray = new Ray (transform.position, Vector3.down);
 		bool isCollingWithGround = Physics.Raycast (ray, out groundHit, hovercraft.MaxHeightToGround, groundLayerMask, QueryTriggerInteraction.Ignore);
 
-		if (isCollingWithGround) {
+		if (isCollingWithGround)
+		{
 			float upForceDistanceFactor = 1.0f - groundHit.distance / hovercraft.MaxHeightToGround;
 			rigidBody.AddForceAtPosition (Vector3.up * upForceDistanceFactor * hovercraft.PropellerForceFactor, transform.position);
+		
+		} else
+		{
+			if (hovercraft.transform.position.y > transform.position.y)
+			{
+				rigidBody.AddForceAtPosition (transform.up * -hovercraft.PropellerForceFactor, transform.position);
+			} else
+			{
+				rigidBody.AddForceAtPosition (transform.up * hovercraft.PropellerForceFactor, transform.position);
+			}
 		}
 	}
 }
