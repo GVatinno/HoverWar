@@ -7,8 +7,8 @@ public class HovercraftController : MonoBehaviour {
 	private Rigidbody rigidBody;
 	private const float moveForceFactor = 5000.0f;
 	private const float turnForceFactor = 500.0f;
-	private const float propellerForceFactor = 1000.0f;
-	private const float maxHeightToGround = 3.0f;
+	private const float propellerForceFactor = 1500.0f;
+	private const float maxHeightToGround = 4.0f;
 
 
 	private float moveForceMagnitude = 0.0f;
@@ -36,13 +36,13 @@ public class HovercraftController : MonoBehaviour {
 	}
 
 	void Update () {
-		moveForceMagnitude = Input.GetAxis ("Vertical") * -moveForceFactor;
-		turnForceMagnitude = Input.GetAxis ("Horizontal") * -turnForceFactor;
+		moveForceMagnitude = Input.GetAxis ("Vertical") * moveForceFactor;
+		turnForceMagnitude = Input.GetAxis ("Horizontal") * turnForceFactor;
 	}
 
 	void FixedUpdate()
 	{
-		rigidBody.AddRelativeForce (transform.forward * moveForceMagnitude);
-		rigidBody.AddRelativeTorque (Vector3.right * turnForceMagnitude);
+		rigidBody.AddForce (transform.forward * moveForceMagnitude);
+		rigidBody.AddRelativeTorque (Vector3.up * turnForceMagnitude);
 	}
 }
