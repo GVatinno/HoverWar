@@ -25,5 +25,6 @@ public class MessageBus {
 
 
 	// Action 
-	public Action<Vector3> OnEnemyCreated = delegate {};
+	public Action<Enemy> OnEnemyCreated = delegate {};
+
 }
