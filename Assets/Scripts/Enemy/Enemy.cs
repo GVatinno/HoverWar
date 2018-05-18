@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour {
 		GetPredictPlayerPosition (out predictedPosition);
 
 		// TODO swap for a pool
-		Projectile projectile = Instantiate<Projectile>(m_projectilePrefab);
+		Projectile projectile = Instantiate<Projectile>(m_projectilePrefab, m_shootingHead.transform.position, Quaternion.identity);
 		Vector3 origin = m_shootingHead.transform.position;
 
 		projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_projectileSpeed  );
