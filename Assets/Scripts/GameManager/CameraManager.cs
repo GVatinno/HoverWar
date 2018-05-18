@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// TODO use the lazy generic
 public sealed class CameraManager
 {
 	private static CameraManager instance = null;

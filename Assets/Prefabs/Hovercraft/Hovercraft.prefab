@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33961056025508246}
   - component: {fileID: 23473151965063384}
   - component: {fileID: 114423643428908592}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: rearLeftPropeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4912203606573754}
   - component: {fileID: 33677450194459878}
   - component: {fileID: 23659588802160768}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: HoverModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 33132805694372898}
   - component: {fileID: 23369811737581972}
   - component: {fileID: 114303861931008400}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: frontRightPropeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,9 +75,10 @@ GameObject:
   - component: {fileID: 65333478443977822}
   - component: {fileID: 54108872989932140}
   - component: {fileID: 114133955131542464}
-  m_Layer: 0
+  - component: {fileID: 136663312957951562}
+  m_Layer: 10
   m_Name: Hovercraft
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +94,7 @@ GameObject:
   - component: {fileID: 33795898008364112}
   - component: {fileID: 23283660110259880}
   - component: {fileID: 114005887059511340}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: frontLeftPropeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +111,7 @@ GameObject:
   - component: {fileID: 4772807680564320}
   - component: {fileID: 33825248696590644}
   - component: {fileID: 23921968516077804}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +129,7 @@ GameObject:
   - component: {fileID: 33676546913007426}
   - component: {fileID: 23562301816820334}
   - component: {fileID: 114267442139730436}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: rearRightPropeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613422530165370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.07, y: 5, z: 33.32}
+  m_LocalPosition: {x: 16, y: 5, z: -62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912203606573754}
@@ -499,9 +500,9 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613422530165370}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e75c809b9c581534fa63f16ac907bbb1, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
@@ -560,3 +561,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f684f59b564359c48abffae706db5c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &136663312957951562
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613422530165370}
+  m_Material: {fileID: 13400000, guid: e75c809b9c581534fa63f16ac907bbb1, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.61
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}

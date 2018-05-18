@@ -31,8 +31,14 @@ public class HovercraftController : MonoBehaviour {
 	// TODO USE m_ FOR PRIVATE MEMBERS AND LOWER CASE PROPERTY
 
 	void Awake () {
-		
 		rigidBody = GetComponent<Rigidbody> ();
+		PlayerManager.Instance.RegisterPlayer (this.gameObject);
+		rigidBody.centerOfMass = Vector3.zero;
+	}
+
+	void OnDestroy()
+	{
+		PlayerManager.Instance.UnRegisterPlayer();
 	}
 
 	void Update () {

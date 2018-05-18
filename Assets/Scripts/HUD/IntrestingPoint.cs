@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class IntrestingPoint : MonoBehaviour {
 
-	string m_intrestingPointLabel = "";
+
 	Text m_indicator = null;
 	RectTransform m_rectTransfrom = null;
 	RectTransform m_canvasRectTransfrom = null;
@@ -20,15 +20,13 @@ public class IntrestingPoint : MonoBehaviour {
 	public string label
 	{
 		set { 
-			m_intrestingPointLabel = value;
-			m_indicator.text = m_intrestingPointLabel;
+			m_indicator.text = value;
 		}
 	}
 
 	void Awake()
 	{
 		m_indicator = GetComponentInChildren<Text> ();
-		m_indicator.text = m_intrestingPointLabel;
 		m_rectTransfrom = GetComponent<RectTransform> ();
 		m_canvasRectTransfrom = this.transform.parent.GetComponent<RectTransform> ();
 	}

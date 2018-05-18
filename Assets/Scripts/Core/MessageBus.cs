@@ -26,5 +26,6 @@ public class MessageBus {
 
 	// Action 
 	public Action<Enemy> OnEnemyCreated = delegate {};
+	public Action<Enemy> OnEnemyDestroyed = delegate {};
 
 }
