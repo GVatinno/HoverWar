@@ -32,7 +32,7 @@ public class HudController : MonoBehaviour {
 	void CreateIntrestingPoint(Enemy enemy)
 	{
 		IntrestingPoint point = Instantiate<IntrestingPoint>(m_intrestingPointPrefab, this.transform, false);
-		point.worldPosition = enemy.transform.position;
+		point.worldPosition = enemy.centerPoint;
 		point.label = enemy.label;
 		point.OnUpdateIntrestingPointPositionUpdated ();
 		m_intresingPointList.Add (point);

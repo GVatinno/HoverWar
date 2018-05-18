@@ -46,12 +46,17 @@ public class IntrestingPoint : MonoBehaviour {
 			Vector2 localPos = Vector2.zero;
 			RectTransformUtility.ScreenPointToLocalPointInRectangle (m_canvasRectTransfrom, screenPos, null, out localPos);
 			m_rectTransfrom.anchoredPosition = localPos;
-			if ( !this.isActiveAndEnabled )
-				this.gameObject.SetActive (true);
-		} else
+			SetActive (true);
+		} 
+		else
 		{
-			if ( this.isActiveAndEnabled )
-				this.gameObject.SetActive (false);
+			SetActive (false);
 		}
+	}
+
+	void SetActive(bool active)
+	{
+		if ( this.isActiveAndEnabled != active )
+			this.gameObject.SetActive (active);
 	}
 }
