@@ -80,6 +80,7 @@ public sealed class TargetLockManager
 				MessageBus.Instance.OnTargetLockedChanged ( m_targetCache [m_currentTargetIndex] );
 				return;
 			}
+			++counter;
 		}
 		m_currentTargetIndex = -1;
 		MessageBus.Instance.OnTargetLockedChanged ( null );
