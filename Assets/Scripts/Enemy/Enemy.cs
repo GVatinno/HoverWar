@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour {
 	void ShootProjectile()
 	{
 		Vector3 predictedPosition = Vector3.zero;
-		GetPredictPlayerPosition (out predictedPosition);
+		ComputePredictPlayerPosition (out predictedPosition);
 
 		// TODO swap for a pool
 		Projectile projectile = Instantiate<Projectile>(m_projectilePrefab, m_shootingHead.transform.position, Quaternion.identity);
@@ -108,10 +108,42 @@ public class Enemy : MonoBehaviour {
 		projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_projectileSpeed  );
 	}
 
-	void GetPredictPlayerPosition(out Vector3 predictedPlayerPosition)
+	void ComputePredictPlayerPosition(out Vector3 predictedPlayerPosition)
 	{
 		GameObject player = PlayerManager.Instance.GetPlayer ();
-		predictedPlayerPosition = player.transform.position;
+		Rigidbody playerRigidBody = PlayerManager.Instance.GetPlayerRigidBody ();
+		// using the equation of ray and sphere intersection to predict
+		// the hitpoint of the player P moving with costant velocity V
+		// from an Enemy E shooting a projectile with constant velocity s
+		// gives us the parametric equation for t
+		// (P + tV - E )^2   = (st)^2
+
+		Vector3 P = player.transform.position;
+		Vector3 E = m_shootingHead.transform.position;
+		Vector3 V = playerRigidBody.velocity;
+		float s = m_projectileSpeed;
+		Vector3 W = P - E;
+
+		// which become a quadratic equation t^2V*V + 2W*V + W*W = st^2
+		// of the type at^2 + 2ab + c = 0
+
+		float a = Vector3.Dot (V, V) - (s*s);
+		float b = 2.0f * Vector3.Dot (W, V);
+		float c = Vector3.Dot (W, W);
+
+		float t0 = 0.0f;
+		float t1 = 0.0f;
+		if (!MathUtils.computeQuadraticSolution (a, b, c, out t0, out t1)) {
+			// if no solution are available return the player position
+			predictedPlayerPosition = player.transform.position;
+			return;
+		}
+
+		float t = t0;
+		if (t < 0.0f)
+			t = t1;
+
+		predictedPlayerPosition = P + V * t;
 	}
 
 

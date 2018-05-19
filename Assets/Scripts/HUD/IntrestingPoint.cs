@@ -23,6 +23,7 @@ public class IntrestingPoint : MonoBehaviour {
 			m_indicator.text = value;
 		}
 	}
+	// use an init function
 
 	void Awake()
 	{
