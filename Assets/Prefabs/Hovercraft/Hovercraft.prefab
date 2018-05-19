@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114423643428908592}
   m_Layer: 10
   m_Name: rearLeftPropeller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,9 +39,10 @@ GameObject:
   - component: {fileID: 4912203606573754}
   - component: {fileID: 33677450194459878}
   - component: {fileID: 23659588802160768}
+  - component: {fileID: 136958417918033118}
   m_Layer: 10
   m_Name: HoverModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +60,7 @@ GameObject:
   - component: {fileID: 114303861931008400}
   m_Layer: 10
   m_Name: frontRightPropeller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +75,7 @@ GameObject:
   - component: {fileID: 4656947941266598}
   m_Layer: 10
   m_Name: MissileSource
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,10 +88,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4297548889607924}
-  - component: {fileID: 65333478443977822}
   - component: {fileID: 54108872989932140}
   - component: {fileID: 114133955131542464}
-  - component: {fileID: 136663312957951562}
   m_Layer: 10
   m_Name: Hovercraft
   m_TagString: Player
@@ -111,7 +110,7 @@ GameObject:
   - component: {fileID: 114005887059511340}
   m_Layer: 10
   m_Name: frontLeftPropeller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +127,7 @@ GameObject:
   - component: {fileID: 23921968516077804}
   m_Layer: 10
   m_Name: MissileLauncher
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +145,7 @@ GameObject:
   - component: {fileID: 114267442139730436}
   m_Layer: 10
   m_Name: rearRightPropeller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,26 +156,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140288852979784}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.4, y: -0.6, z: 0}
-  m_LocalScale: {x: 0.39999998, y: 0.20000032, z: 0.40000063}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.4, y: -0.6, z: -0.09}
+  m_LocalScale: {x: 0.39999998, y: 0.2, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4912203606573754}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4266279896329306
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828788749867960}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.4, y: -0.6, z: 0}
-  m_LocalScale: {x: 0.39999998, y: 0.20000032, z: 0.40000063}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.4, y: -0.6, z: -0.09}
+  m_LocalScale: {x: 0.39999998, y: 0.2, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4912203606573754}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4297548889607924
 Transform:
   m_ObjectHideFlags: 1
@@ -197,26 +196,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345571392369376}
-  m_LocalRotation: {x: -0.64345586, y: 0, z: 0, w: 0.76548326}
-  m_LocalPosition: {x: 0, y: 0.17, z: -0.21}
+  m_LocalRotation: {x: -0.68642503, y: -0.0058510182, z: 0.0028741437, w: 0.72717136}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4772807680564320}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -80.1, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -86.623, y: -12.207001, z: 11.966001}
 --- !u!4 &4694812938218448
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1625508891928720}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.4, y: 0.6, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.4, y: 0.6, z: -0.09}
   m_LocalScale: {x: 0.4, y: 0.2, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4912203606573754}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4772807680564320
 Transform:
   m_ObjectHideFlags: 1
@@ -237,13 +236,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1322514851387086}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.4, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.39999998, y: 0.20000032, z: 0.40000063}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.4, y: 0.6, z: -0.09}
+  m_LocalScale: {x: 0.39999998, y: 0.2, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4912203606573754}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4912203606573754
 Transform:
   m_ObjectHideFlags: 1
@@ -271,7 +270,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -305,7 +304,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -339,7 +338,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -373,7 +372,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -515,26 +514,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613422530165370}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 70
   m_Drag: 2
   m_AngularDrag: 2
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65333478443977822
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1613422530165370}
-  m_Material: {fileID: 13400000, guid: e75c809b9c581534fa63f16ac907bbb1, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 1, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114005887059511340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,7 +547,7 @@ MonoBehaviour:
   m_missileSource: {fileID: 1345571392369376}
   m_missilePrefab: {fileID: 114190229125037190, guid: 74f0a89265d2666409ac2f8fe6dcfc84,
     type: 2}
-  m_missileSpeed: 100
+  m_missileSpeed: 30
 --- !u!114 &114267442139730436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -594,16 +581,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f684f59b564359c48abffae706db5c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &136663312957951562
+--- !u!136 &136958417918033118
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1613422530165370}
-  m_Material: {fileID: 13400000, guid: e75c809b9c581534fa63f16ac907bbb1, type: 2}
+  m_GameObject: {fileID: 1159316450279830}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 3.61
-  m_Direction: 2
+  m_Enabled: 0
+  m_Radius: 0.4
+  m_Height: 2.0000005
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

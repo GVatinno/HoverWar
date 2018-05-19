@@ -14,8 +14,8 @@ public class Projectile : MonoBehaviour {
 		m_velocity = direction * speed;
 	}
 
-	void Update () {
-		this.transform.position += m_velocity * Time.deltaTime;
+	void FixedUpdate () {
+		this.transform.position += m_velocity * Time.fixedDeltaTime;
 	}
 		
 	void OnTriggerEnter(Collider other) {

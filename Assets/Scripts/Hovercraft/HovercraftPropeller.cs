@@ -32,11 +32,16 @@ public class HovercraftPropeller : MonoBehaviour {
 		{
 			if (hovercraft.transform.position.y > transform.position.y)
 			{
-				rigidBody.AddForceAtPosition (transform.up * -hovercraft.PropellerForceFactor, transform.position);
+				rigidBody.AddForceAtPosition (transform.up * hovercraft.PropellerForceFactor, transform.position);
 			} else
 			{
-				rigidBody.AddForceAtPosition (transform.up * hovercraft.PropellerForceFactor, transform.position);
+				rigidBody.AddForceAtPosition (transform.up * -hovercraft.PropellerForceFactor, transform.position);
 			}
 		}
+	}
+
+	void OnDrawGizmos()
+	{
+		Gizmos.DrawRay (transform.position, transform.up);
 	}
 }

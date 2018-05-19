@@ -12,6 +12,7 @@ public class Missile : MonoBehaviour {
 	Vector3 m_target = Vector3.zero;
 	Vector3 m_origin = Vector3.zero;
 	float m_speed = 0.0f;
+	Vector3 m_velocity = Vector3.zero;
 
 	public void Init( Vector3 origin, Vector3 direction, Vector3 target,  float speed )
 	{
@@ -26,23 +27,28 @@ public class Missile : MonoBehaviour {
 		m_selfGuidanceActivationDistanceSqrd = m_selfGuidanceActivationDistance * m_selfGuidanceActivationDistance;
 	}
 
-	void Update () {
-		if (m_selfGuidanceActivated) {
-			this.transform.rotation = Quaternion.RotateTowards (
-				this.transform.rotation,
-				Quaternion.LookRotation (m_target - this.transform.position),
-				Time.deltaTime * m_speed);
-		}
-		else {
+	void Update()
+	{
+		if ( ! m_selfGuidanceActivated) {
 			if ((this.transform.position - m_origin).sqrMagnitude > m_selfGuidanceActivationDistanceSqrd) {
 
 				m_selfGuidanceActivated = true;
 				m_trailRenderer.enabled = true;
 			}
 		}
-
-		this.transform.position += this.transform.forward * m_speed  * Time.deltaTime;
 	}
+
+	void FixedUpdate () {
+		if (m_selfGuidanceActivated) {
+			this.transform.rotation = Quaternion.RotateTowards (
+				this.transform.rotation,
+				Quaternion.LookRotation (m_target - this.transform.position),
+				Time.fixedDeltaTime * m_speed);
+		}
+		this.transform.position += this.transform.forward * m_speed  * Time.fixedDeltaTime;
+	}
+
+
 
 	void OnTriggerEnter(Collider other) {
 		Destroy(this.gameObject);

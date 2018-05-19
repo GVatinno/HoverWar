@@ -12,10 +12,10 @@ public class HovercraftController : MonoBehaviour {
 	float m_missileSpeed = 10.0f;
 
 	private Rigidbody rigidBody;
-	private const float moveForceFactor = 5000.0f;
-	private const float turnForceFactor = 500.0f;
+	private const float moveForceFactor = 7000.0f;
+	private const float turnForceFactor = 800.0f;
 	private const float propellerForceFactor = 1500.0f;
-	private const float maxHeightToGround = 4.0f;
+	private const float maxHeightToGround = 5.0f;
 
 
 	private float moveForceMagnitude = 0.0f;
