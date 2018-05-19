@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(TrailRenderer))]
 public class Projectile : MonoBehaviour {
 
 	Vector3 m_velocity = Vector3.zero;
@@ -16,13 +17,7 @@ public class Projectile : MonoBehaviour {
 	void Update () {
 		this.transform.position += m_velocity * Time.deltaTime;
 	}
-
-	void OnCollisionEnter(Collision collision)
-	{
 		
-
-	}
-
 	void OnTriggerEnter(Collider other) {
 		GameObject player = PlayerManager.Instance.GetPlayer ();
 		if (other.tag == player.tag) {

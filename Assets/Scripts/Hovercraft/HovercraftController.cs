@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class HovercraftController : MonoBehaviour {
 
+	[SerializeField]
+	GameObject m_missileSource = null;
+	[SerializeField]
+	Missile m_missilePrefab = null;
+	[SerializeField]
+	float m_missileSpeed = 10.0f;
+
 	private Rigidbody rigidBody;
 	private const float moveForceFactor = 5000.0f;
 	private const float turnForceFactor = 500.0f;
@@ -13,6 +20,8 @@ public class HovercraftController : MonoBehaviour {
 
 	private float moveForceMagnitude = 0.0f;
 	private float turnForceMagnitude = 0.0f;
+
+
 
 	public float MaxHeightToGround
 	{
@@ -47,11 +56,27 @@ public class HovercraftController : MonoBehaviour {
 		{
 			TargetLockManager.Instance.RequestChangeTarget ();
 		}
+		if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.KeypadEnter)) {
+			ShootMissile ();
+		}
 	}
 
 	void FixedUpdate()
 	{
 		rigidBody.AddForce (transform.forward * moveForceMagnitude);
 		rigidBody.AddRelativeTorque (Vector3.up * turnForceMagnitude);
+	}
+
+	void ShootMissile()
+	{
+		if (TargetLockManager.Instance.hasCurrentTarget) {
+			Missile missile = Instantiate<Missile> (m_missilePrefab);
+			missile.Init (
+				m_missileSource.transform.position, 
+				m_missileSource.transform.forward,
+				TargetLockManager.Instance.currentTarget.centerPoint,
+				m_missileSpeed);
+		}
+
 	}
 }

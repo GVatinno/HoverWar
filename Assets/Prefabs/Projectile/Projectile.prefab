@@ -134,7 +134,7 @@ TrailRenderer:
     textureMode: 0
     generateLightingData: 0
   m_MinVertexDistance: 0.4
-  m_Autodestruct: 1
+  m_Autodestruct: 0
 --- !u!114 &114135810275917464
 MonoBehaviour:
   m_ObjectHideFlags: 1

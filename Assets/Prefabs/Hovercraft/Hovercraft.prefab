@@ -64,6 +64,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1345571392369376
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4656947941266598}
+  m_Layer: 10
+  m_Name: MissileSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1613422530165370
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +127,7 @@ GameObject:
   - component: {fileID: 33825248696590644}
   - component: {fileID: 23921968516077804}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: MissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,6 +191,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4656947941266598
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345571392369376}
+  m_LocalRotation: {x: -0.64345586, y: 0, z: 0, w: 0.76548326}
+  m_LocalPosition: {x: 0, y: 0.17, z: -0.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4772807680564320}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -80.1, y: 0, z: 0}
 --- !u!4 &4694812938218448
 Transform:
   m_ObjectHideFlags: 1
@@ -195,13 +223,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1827823872156976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.437, z: -0.59}
+  m_LocalRotation: {x: -0.2009069, y: 0, z: 0, w: 0.9796104}
+  m_LocalPosition: {x: 0, y: -0.547, z: -0.64}
   m_LocalScale: {x: 0.3, y: 0.6, z: 0.3}
-  m_Children: []
+  m_Children:
+  - {fileID: 4656947941266598}
   m_Father: {fileID: 4912203606573754}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -23.18, y: 0, z: 0}
 --- !u!4 &4780861789773268
 Transform:
   m_ObjectHideFlags: 1
@@ -528,6 +557,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47a7d4d1cbea8f4c8b6a7b9e66b9030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_missileSource: {fileID: 1345571392369376}
+  m_missilePrefab: {fileID: 114190229125037190, guid: 74f0a89265d2666409ac2f8fe6dcfc84,
+    type: 2}
+  m_missileSpeed: 100
 --- !u!114 &114267442139730436
 MonoBehaviour:
   m_ObjectHideFlags: 1
