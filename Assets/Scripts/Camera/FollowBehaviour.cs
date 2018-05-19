@@ -11,8 +11,8 @@ public class FollowBehaviour : MonoBehaviour
 	[SerializeField] 
 	float m_zOffset = 0.0f;
 
-	Vector3 m_currentVelocity = Vector3.zero;
-
+	Vector3 m_prevPosition = Vector3.zero;
+	Quaternion m_prevRotation = Quaternion.identity;
 
 	void LateUpdate() {
 		
@@ -25,6 +25,12 @@ public class FollowBehaviour : MonoBehaviour
 		Vector3 target = m_target.transform.position - moveBackVector;
 		this.transform.position = target;
 		this.transform.LookAt (m_target.transform);
+
+		if (this.transform.position != m_prevPosition || m_prevRotation != this.transform.rotation)
+			MessageBus.Instance.OnPlayerCameraMoved ();
+
+		m_prevPosition = this.transform.position;
+		m_prevRotation = this.transform.rotation;
 
 	}
 }

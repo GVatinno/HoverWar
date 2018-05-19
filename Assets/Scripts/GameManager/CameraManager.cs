@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// TODO KILL THIS MANAGER USE PLAYER MANAGER
 // TODO use the lazy generic
 public sealed class CameraManager
 {

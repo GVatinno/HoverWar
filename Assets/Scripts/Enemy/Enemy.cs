@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour {
 	WaitForSeconds m_waitForShootingIterval;
 	float m_sightRadiusSqr = 0.0f;
 	int m_playerAndGroundLayerMask = 0;
+	bool m_enemyBehindPlayerCamera = false;
 
 	// TODO DO LAYER MASK ENUM
 
@@ -34,20 +35,30 @@ public class Enemy : MonoBehaviour {
 		get { return m_Collider.bounds.center;  }
 	}
 
+	public bool isEnemyBehindThePlayer
+	{
+		get { return m_enemyBehindPlayerCamera;  }
+	}
+
 	void Awake()
 	{
 		m_sightRadiusSqr = m_sightRadius * m_sightRadius ;
 		m_Collider = GetComponent<Collider> ();
 		m_waitForShootingIterval = new WaitForSeconds (m_shootingIntervalSec);
 		m_playerAndGroundLayerMask = (1 << LayerMask.NameToLayer ("Ground")) | (1 << LayerMask.NameToLayer ("Player"));
+		MessageBus.Instance.OnPlayerCameraMoved += CheckEnemBehindPlayerCamera;
+		EnemyManager.Instance.RegisterEnemy (this);
 	}
 
 	void Start () {
 		MessageBus.Instance.OnEnemyCreated (this);
 		StartCoroutine (AttemptToShootRepeatetly());
+		CheckEnemBehindPlayerCamera ();
 	}
 
 	void OnDestroy () {
+		EnemyManager.Instance.UnRegisterEnemy (this);
+		MessageBus.Instance.OnPlayerCameraMoved -= CheckEnemBehindPlayerCamera;
 		MessageBus.Instance.OnEnemyDestroyed (this);
 		StopAllCoroutines ();
 	}
@@ -102,7 +113,7 @@ public class Enemy : MonoBehaviour {
 		ComputePredictPlayerPosition (out predictedPosition);
 
 		// TODO swap for a pool
-		Projectile projectile = Instantiate<Projectile>(m_projectilePrefab, m_shootingHead.transform.position, Quaternion.identity);
+		Projectile projectile = Instantiate<Projectile>(m_projectilePrefab);
 		Vector3 origin = m_shootingHead.transform.position;
 
 		projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_projectileSpeed  );
@@ -144,6 +155,17 @@ public class Enemy : MonoBehaviour {
 			t = t1;
 
 		predictedPlayerPosition = P + V * t;
+	}
+
+	void CheckEnemBehindPlayerCamera()
+	{
+		Camera playerCamera = CameraManager.Instance.GetPlayerCamera();
+		Vector3 eyeTargetVector = centerPoint - playerCamera.transform.position;
+		bool enemyBehindCamera = Vector3.Dot (playerCamera.transform.forward, eyeTargetVector) < 0;
+		if (m_enemyBehindPlayerCamera != enemyBehindCamera) {
+			MessageBus.Instance.OnEnemyChangedVisibility (this, !enemyBehindCamera);
+		}
+		m_enemyBehindPlayerCamera = enemyBehindCamera;
 	}
 
 

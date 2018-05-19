@@ -14,7 +14,6 @@ public class HovercraftController : MonoBehaviour {
 	private float moveForceMagnitude = 0.0f;
 	private float turnForceMagnitude = 0.0f;
 
-
 	public float MaxHeightToGround
 	{
 		get { return maxHeightToGround; }
@@ -44,6 +43,10 @@ public class HovercraftController : MonoBehaviour {
 	void Update () {
 		moveForceMagnitude = Input.GetAxis ("Vertical") * moveForceFactor;
 		turnForceMagnitude = Input.GetAxis ("Horizontal") * turnForceFactor;
+		if ( Input.GetKeyDown(KeyCode.Space) )
+		{
+			TargetLockManager.Instance.RequestChangeTarget ();
+		}
 	}
 
 	void FixedUpdate()

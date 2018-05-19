@@ -27,5 +27,8 @@ public class MessageBus {
 	// Action 
 	public Action<Enemy> OnEnemyCreated = delegate {};
 	public Action<Enemy> OnEnemyDestroyed = delegate {};
+	public Action OnPlayerCameraMoved = delegate {};
+	public Action<Enemy, bool> OnEnemyChangedVisibility = delegate {};
+	public Action<Enemy> OnTargetLockedChanged = delegate {};
 
 }

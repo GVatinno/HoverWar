@@ -8,8 +8,8 @@ public class Projectile : MonoBehaviour {
 
 	public void Init( Vector3 origin, Vector3 direction, float speed )
 	{
-		// TODO Maybe Use TRail Renderer Clear();
 		this.transform.position = origin;
+		GetComponent<TrailRenderer> ().Clear ();
 		m_velocity = direction * speed;
 	}
 
