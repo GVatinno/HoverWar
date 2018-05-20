@@ -11,3 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449b68a0c75bf3647abf2ae7e7f9524f, type: 3}
   m_Name: FollowBehaviourData
   m_EditorClassIdentifier: 
+  m_moveBackDistance: -15
+  m_fixedHeightDistance: 4
