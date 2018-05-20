@@ -27,7 +27,6 @@ public class Indicator : MonoBehaviour {
 	public void Init(Vector3 worldPosition)
 	{
 		m_worldPosition = worldPosition;
-		OnUpdateIntrestingPointPositionUpdated ();
 	}
 
 	public void Init(Vector3 worldPosition, string label)

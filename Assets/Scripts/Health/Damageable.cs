@@ -13,6 +13,7 @@ public class Damageable : MonoBehaviour {
 	public void AddDamage(float damage)
 	{
 		m_health -= damage;
+		MessageBus.Instance.OnEntityDamaged (this.gameObject, m_health);
 		if (m_health <= 0.0f) {
 			MessageBus.Instance.OnEntityDead (this.gameObject);
 			onKilled ();

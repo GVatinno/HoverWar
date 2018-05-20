@@ -31,5 +31,7 @@ public class MessageBus {
 	public Action<Enemy, bool> OnEnemyChangedVisibility = delegate {};
 	public Action<Enemy> OnTargetLockedChanged = delegate {};
 	public Action<GameObject> OnEntityDead = delegate {};
+	public Action<GameObject, float> OnEntityDamaged = delegate {};
+
 
 }

@@ -25,7 +25,6 @@ public class GameLogicManager : MonoBehaviour {
 		if (obj.tag == "Player") {
 			// lost
 			m_lose.SetActive(true);
-			SceneManager.LoadScene (0);
 		}
 		else
 		if (obj.tag == "Enemy") {
