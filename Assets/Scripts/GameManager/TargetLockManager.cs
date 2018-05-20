@@ -90,7 +90,7 @@ public sealed class TargetLockManager
 	{
 		if (!hasCurrentTarget)
 			return;
-		if (!visibility && m_targetCache[m_currentTargetIndex]) {
+		if (!visibility && m_targetCache[m_currentTargetIndex] == enemy ) {
 			m_currentTargetIndex = -1;
 			MessageBus.Instance.OnTargetLockedChanged ( null );
 		}

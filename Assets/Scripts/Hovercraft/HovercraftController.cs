@@ -7,41 +7,16 @@ public class HovercraftController : MonoBehaviour {
 	[SerializeField]
 	GameObject m_missileSource = null;
 	[SerializeField]
-	Missile m_missilePrefab = null;
-	[SerializeField]
-	float m_missileSpeed = 10.0f;
+	HovercraftData m_data = null;
 
-	private Rigidbody rigidBody;
-	private const float moveForceFactor = 7000.0f;
-	private const float turnForceFactor = 800.0f;
-	private const float propellerForceFactor = 1500.0f;
-	private const float maxHeightToGround = 5.0f;
-
-
-	private float moveForceMagnitude = 0.0f;
-	private float turnForceMagnitude = 0.0f;
-
-
-
-	public float MaxHeightToGround
-	{
-		get { return maxHeightToGround; }
-	}
-
-	public float PropellerForceFactor
-	{
-		get { return propellerForceFactor; }
-	}
-
-
-	// TODO REFACTOR THIS IN SEPARATING INPUT FROM CONTROLLER
-	// TODO USING SCRIPTABLE OBJECT
-	// TODO USE m_ FOR PRIVATE MEMBERS AND LOWER CASE PROPERTY
+	private Rigidbody m_rigidBody;
+	private float m_moveForceMagnitude = 0.0f;
+	private float m_turnForceMagnitude = 0.0f;
 
 	void Awake () {
-		rigidBody = GetComponent<Rigidbody> ();
+		m_rigidBody = GetComponent<Rigidbody> ();
 		PlayerManager.Instance.RegisterPlayer (this.gameObject);
-		rigidBody.centerOfMass = Vector3.zero;
+		m_rigidBody.centerOfMass = Vector3.zero;
 	}
 
 	void OnDestroy()
@@ -50,8 +25,8 @@ public class HovercraftController : MonoBehaviour {
 	}
 
 	void Update () {
-		moveForceMagnitude = Input.GetAxis ("Vertical") * moveForceFactor;
-		turnForceMagnitude = Input.GetAxis ("Horizontal") * turnForceFactor;
+		m_moveForceMagnitude = Input.GetAxis ("Vertical") * m_data.m_moveForceFactor;
+		m_turnForceMagnitude = Input.GetAxis ("Horizontal") *  m_data.m_turnForceFactor;
 		if ( Input.GetKeyDown(KeyCode.Space) )
 		{
 			TargetLockManager.Instance.RequestChangeTarget ();
@@ -63,20 +38,19 @@ public class HovercraftController : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		rigidBody.AddForce (transform.forward * moveForceMagnitude);
-		rigidBody.AddRelativeTorque (Vector3.up * turnForceMagnitude);
+		m_rigidBody.AddForce (transform.forward * m_moveForceMagnitude);
+		m_rigidBody.AddRelativeTorque (Vector3.up * m_turnForceMagnitude);
 	}
 
 	void ShootMissile()
 	{
 		if (TargetLockManager.Instance.hasCurrentTarget) {
-			Missile missile = Instantiate<Missile> (m_missilePrefab);
+			Missile missile = Instantiate<Missile> (m_data.m_missilePrefab);
 			missile.Init (
 				m_missileSource.transform.position, 
 				m_missileSource.transform.forward,
 				TargetLockManager.Instance.currentTarget.centerPoint,
-				m_missileSpeed);
+				m_data.m_missileSpeed);
 		}
-
 	}
 }

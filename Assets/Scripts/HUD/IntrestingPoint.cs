@@ -33,7 +33,7 @@ public class IntrestingPoint : MonoBehaviour {
 	public void OnUpdateIntrestingPointPositionUpdated()
 	{
 		if (this.isActiveAndEnabled) {
-			Camera playerCamera = CameraManager.Instance.GetPlayerCamera ();
+			Camera playerCamera = PlayerManager.Instance.GetPlayerCamera ();
 			Vector2 screenPos = playerCamera.WorldToScreenPoint (m_worldPosition);
 			screenPos.x = Mathf.Clamp (screenPos.x, 0.0f, Screen.width);
 			screenPos.y = Mathf.Clamp (screenPos.y, 0.0f, Screen.height);

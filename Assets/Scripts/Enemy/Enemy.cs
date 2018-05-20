@@ -5,14 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	[SerializeField]
-	EnemyData m_data;
+	EnemyData m_data = null;
 	[SerializeField]
 	GameObject m_shootingHead = null;
 
 	Collider m_Collider;
 	WaitForSeconds m_waitForShootingIterval;
 	float m_sightRadiusSqr = 0.0f;
-	int m_playerAndGroundLayerMask = 0;
 	bool m_enemyBehindPlayerCamera = false;
 
 
@@ -36,7 +35,6 @@ public class Enemy : MonoBehaviour {
 		m_sightRadiusSqr = m_data.m_sightRadius * m_data.m_sightRadius ;
 		m_Collider = GetComponent<Collider> ();
 		m_waitForShootingIterval = new WaitForSeconds (m_data.m_shootingIntervalSec);
-		m_playerAndGroundLayerMask = (1 << LayerMask.NameToLayer ("Ground")) | (1 << LayerMask.NameToLayer ("Player"));
 		MessageBus.Instance.OnPlayerCameraMoved += CheckEnemBehindPlayerCamera;
 		EnemyManager.Instance.RegisterEnemy (this);
 	}
@@ -90,7 +88,7 @@ public class Enemy : MonoBehaviour {
 		// has line of sight with player
 		{
 			RaycastHit info;
-			if (Physics.Raycast (m_shootingHead.transform.position, enemyPlayerVector.normalized, out info, enemyPlayerVector.sqrMagnitude, m_playerAndGroundLayerMask, QueryTriggerInteraction.Ignore)) {
+			if (Physics.Raycast (m_shootingHead.transform.position, enemyPlayerVector.normalized, out info, enemyPlayerVector.sqrMagnitude, LayerMaskUtils.PLAYER_AND_GROUND_LAYER_MASK, QueryTriggerInteraction.Ignore)) {
 				if (info.collider.tag != player.tag)
 					return false;
 			}
@@ -102,6 +100,7 @@ public class Enemy : MonoBehaviour {
 	{
 		Vector3 predictedPosition = Vector3.zero;
 		ComputePredictPlayerPosition (out predictedPosition);
+
 
 		// TODO swap for a pool
 		Projectile projectile = Instantiate<Projectile>(m_data.m_projectilePrefab);
@@ -150,7 +149,7 @@ public class Enemy : MonoBehaviour {
 
 	void CheckEnemBehindPlayerCamera()
 	{
-		Camera playerCamera = CameraManager.Instance.GetPlayerCamera();
+		Camera playerCamera = PlayerManager.Instance.GetPlayerCamera();
 		Vector3 eyeTargetVector = centerPoint - playerCamera.transform.position;
 		bool enemyBehindCamera = Vector3.Dot (playerCamera.transform.forward, eyeTargetVector) < 0;
 		if (m_enemyBehindPlayerCamera != enemyBehindCamera) {

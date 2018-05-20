@@ -12,7 +12,6 @@ public class EnemyData : ScriptableObject {
 	public float m_shootingIntervalSec = 2.0f;
 	[SerializeField]
 	public float m_projectileSpeed = 100.0f;
-
 	[SerializeField]
 	public Projectile m_projectilePrefab = null;
 }

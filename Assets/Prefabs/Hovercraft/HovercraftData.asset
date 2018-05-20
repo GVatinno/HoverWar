@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7e61de174627a4e8543d16f6972ddd, type: 3}
+  m_Name: HovercraftData
+  m_EditorClassIdentifier: 
+  m_missilePrefab: {fileID: 114190229125037190, guid: 74f0a89265d2666409ac2f8fe6dcfc84,
+    type: 2}
+  m_missileSpeed: 40
+  m_moveForceFactor: 7000
+  m_turnForceFactor: 800
+  m_propellerForceFactor: 1500
+  m_maxHeightToGround: 5

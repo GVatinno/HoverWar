@@ -4,39 +4,34 @@ using UnityEngine;
 
 public class HovercraftPropeller : MonoBehaviour {
 
-	private Rigidbody rigidBody;
-	private HovercraftController hovercraft;
-	private int groundLayerMask;
+	[SerializeField]
+	HovercraftData m_data;
+
+	private Rigidbody m_rigidBody;
+	private HovercraftController m_hovercraft;
+	private int m_groundLayerMask;
 	private float m_propulsorYOffset;
 
 	void Awake () {
-		
-		hovercraft = GetComponentInParent<HovercraftController> ();
-		rigidBody = hovercraft.GetComponent<Rigidbody> ();
-		groundLayerMask = (1 << LayerMask.NameToLayer("Ground"));
+		m_hovercraft = GetComponentInParent<HovercraftController> ();
+		m_rigidBody = m_hovercraft.GetComponent<Rigidbody> ();
 	}
-	
-	// Update is called once per frame
+
 	void FixedUpdate () {
 		
 		RaycastHit groundHit;
 		Ray ray = new Ray (transform.position, Vector3.down);
-		bool isCollingWithGround = Physics.Raycast (ray, out groundHit, hovercraft.MaxHeightToGround, groundLayerMask, QueryTriggerInteraction.Ignore);
+		bool isCollingWithGround = Physics.Raycast (ray, out groundHit, m_data.m_maxHeightToGround, LayerMaskUtils.GROUND_LAYER_MASK, QueryTriggerInteraction.Ignore);
 
 		if (isCollingWithGround)
 		{
-			float upForceDistanceFactor = 1.0f - groundHit.distance / hovercraft.MaxHeightToGround;
-			rigidBody.AddForceAtPosition (Vector3.up * upForceDistanceFactor * hovercraft.PropellerForceFactor, transform.position);
+			float upForceDistanceFactor = 1.0f - groundHit.distance / m_data.m_maxHeightToGround;
+			m_rigidBody.AddForceAtPosition (Vector3.up * upForceDistanceFactor * m_data.m_propellerForceFactor, transform.position);
 		
 		} else
 		{
-			if (hovercraft.transform.position.y > transform.position.y)
-			{
-				rigidBody.AddForceAtPosition (transform.up * hovercraft.PropellerForceFactor, transform.position);
-			} else
-			{
-				rigidBody.AddForceAtPosition (transform.up * -hovercraft.PropellerForceFactor, transform.position);
-			}
+			float directionFactor = m_hovercraft.transform.position.y > transform.position.y ? 1.0f : -1.0f;
+			m_rigidBody.AddForceAtPosition (transform.up * directionFactor * m_data.m_propellerForceFactor, transform.position);
 		}
 	}
 

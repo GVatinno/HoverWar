@@ -9,6 +9,7 @@ public sealed class PlayerManager
 	private static PlayerManager instance = null;
 	private GameObject m_player;
 	private Rigidbody m_playerRigidBody;
+	private Camera m_playerCamera = null;
 
 	public static PlayerManager Instance {
 		get {
@@ -24,12 +25,19 @@ public sealed class PlayerManager
 
 	private PlayerManager()
 	{
+		m_playerCamera = Camera.main;
 	}
 
 	public GameObject GetPlayer ()
 	{
 		Debug.Assert (m_player != null);
 		return m_player; 
+	}
+
+	public Camera GetPlayerCamera()
+	{
+		Debug.Assert (m_playerCamera != null);
+		return m_playerCamera;
 	}
 
 	public Rigidbody GetPlayerRigidBody()
