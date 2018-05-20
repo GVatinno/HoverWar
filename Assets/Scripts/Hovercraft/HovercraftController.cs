@@ -12,15 +12,30 @@ public class HovercraftController : MonoBehaviour {
 	private Rigidbody m_rigidBody;
 	private float m_moveForceMagnitude = 0.0f;
 	private float m_turnForceMagnitude = 0.0f;
+	Damageable m_damageable = null;
 
 	void Awake () {
 		m_rigidBody = GetComponent<Rigidbody> ();
 		PlayerManager.Instance.RegisterPlayer (this.gameObject);
 		m_rigidBody.centerOfMass = Vector3.zero;
+		m_damageable = GetComponent<Damageable> ();
+		m_damageable.onKilled += OnKilled;
+	}
+
+	void OnKilled()
+	{
+		m_damageable.onKilled -= OnKilled;
+		GameObject explosion = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.EXPLOSION);
+		if (explosion) {
+			explosion.transform.position = this.transform.position;
+			explosion.SetActive (true);
+		}
+		this.gameObject.SetActive (false);
 	}
 
 	void OnDestroy()
 	{
+		
 		PlayerManager.Instance.UnRegisterPlayer();
 	}
 

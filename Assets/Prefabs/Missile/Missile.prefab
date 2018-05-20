@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 96194652259328526}
   - component: {fileID: 136664155711735940}
   - component: {fileID: 54243192648394446}
+  - component: {fileID: 114470549420041022}
   m_Layer: 12
   m_Name: Missile
   m_TagString: Untagged
@@ -379,6 +380,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_selfGuidanceActivationDistance: 8
+  m_selfDestroyTime: 15
+--- !u!114 &114470549420041022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1468846754264940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae5ba584a4475d49ac0fcb38b3503bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_damage: 10
 --- !u!136 &136664155711735940
 CapsuleCollider:
   m_ObjectHideFlags: 1

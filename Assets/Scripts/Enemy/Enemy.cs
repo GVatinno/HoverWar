@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
 	WaitForSeconds m_waitForShootingIterval;
 	float m_sightRadiusSqr = 0.0f;
 	bool m_enemyBehindPlayerCamera = false;
+	Damageable m_damageable = null;
 
 	public string label
 	{
@@ -35,7 +36,15 @@ public class Enemy : MonoBehaviour {
 		m_Collider = GetComponent<Collider> ();
 		m_waitForShootingIterval = new WaitForSeconds (m_data.m_shootingIntervalSec);
 		MessageBus.Instance.OnPlayerCameraMoved += CheckEnemBehindPlayerCamera;
+		m_damageable = GetComponent<Damageable> ();
+		m_damageable.onKilled += OnKilled;
 		EnemyManager.Instance.RegisterEnemy (this);
+	}
+
+	void OnKilled()
+	{
+		m_damageable.onKilled -= OnKilled;
+		Destroy (this.gameObject);
 	}
 
 	void Start () {
@@ -46,6 +55,7 @@ public class Enemy : MonoBehaviour {
 
 	void OnDestroy () {
 		EnemyManager.Instance.UnRegisterEnemy (this);
+		m_damageable.onKilled -= OnKilled;
 		MessageBus.Instance.OnPlayerCameraMoved -= CheckEnemBehindPlayerCamera;
 		MessageBus.Instance.OnEnemyDestroyed (this);
 		StopAllCoroutines ();

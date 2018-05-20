@@ -30,5 +30,6 @@ public class MessageBus {
 	public Action OnPlayerCameraMoved = delegate {};
 	public Action<Enemy, bool> OnEnemyChangedVisibility = delegate {};
 	public Action<Enemy> OnTargetLockedChanged = delegate {};
+	public Action<GameObject> OnEntityDead = delegate {};
 
 }

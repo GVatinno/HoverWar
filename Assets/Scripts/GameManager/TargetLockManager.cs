@@ -45,6 +45,7 @@ public sealed class TargetLockManager
 
 	void OnEnemyListChanged(Enemy enemy)
 	{
+		MessageBus.Instance.OnTargetLockedChanged ( null );
 		RebuildEnemyTargetCache ();
 	}
 

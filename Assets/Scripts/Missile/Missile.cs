@@ -6,6 +6,8 @@ public class Missile : MonoBehaviour {
 
 	[SerializeField]
 	float m_selfGuidanceActivationDistance = 10.0f;
+	[SerializeField]
+	float m_selfDestroyTime = 1.0f;
 	float m_selfGuidanceActivationDistanceSqrd = 0.0f;
 	TrailRenderer m_trailRenderer;
 	bool m_selfGuidanceActivated = false;
@@ -14,6 +16,7 @@ public class Missile : MonoBehaviour {
 	float m_speed = 0.0f;
 	float m_chasingSpeed = 0.0f;
 	Vector3 m_velocity = Vector3.zero;
+	WaitForSeconds m_waitBeforeSuicide;
 
 	public void Init( Vector3 origin, Vector3 direction, Vector3 target,  float speed, float chasingSpeed )
 	{
@@ -27,16 +30,24 @@ public class Missile : MonoBehaviour {
 		m_origin = origin;
 		m_chasingSpeed = chasingSpeed;
 		m_selfGuidanceActivationDistanceSqrd = m_selfGuidanceActivationDistance * m_selfGuidanceActivationDistance;
+		m_waitBeforeSuicide = new WaitForSeconds(m_selfDestroyTime);
 	}
 
 	void OnEnable()
 	{
 		StartCoroutine (ActivateTrailAfterDistance ());
+		StartCoroutine (SuicideAfterTime ());
 	}
 
 	void OnDisable()
 	{
 		StopAllCoroutines ();
+	}
+
+	IEnumerator SuicideAfterTime()
+	{
+		yield return m_waitBeforeSuicide;
+		OnDestructing ();
 	}
 
 	IEnumerator ActivateTrailAfterDistance()
@@ -68,15 +79,21 @@ public class Missile : MonoBehaviour {
 		this.transform.position += this.transform.forward * m_speed  * Time.fixedDeltaTime;
 	}
 
-
-
-	void OnTriggerEnter(Collider other) {
+	void OnDestructing()
+	{
 		PoolManager.Instance.returnPoolElement (PoolManager.PoolType.MISSILE, this.gameObject);
 		GameObject explosion = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.EXPLOSION);
 		if (explosion) {
 			explosion.transform.position = this.transform.position;
 			explosion.SetActive (true);
 		}
+	}
 
+	void OnTriggerEnter(Collider other) {
+		
+		OnDestructing ();
+		Damaging damaging = GetComponent<Damaging> ();
+		if (damaging)
+			damaging.Damage (other.gameObject);
 	}
 }

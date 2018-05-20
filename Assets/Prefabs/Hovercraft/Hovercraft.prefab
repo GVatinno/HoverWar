@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 4297548889607924}
   - component: {fileID: 54108872989932140}
   - component: {fileID: 114133955131542464}
+  - component: {fileID: 114251592877935032}
   m_Layer: 10
   m_Name: Hovercraft
   m_TagString: Player
@@ -559,6 +560,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_missileSource: {fileID: 1345571392369376}
   m_data: {fileID: 11400000, guid: 105c9c98018ffce41a5a14070617919d, type: 2}
+--- !u!114 &114251592877935032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613422530165370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d836282ce15bcc47ab4ce97e13736e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 50
 --- !u!114 &114267442139730436
 MonoBehaviour:
   m_ObjectHideFlags: 1

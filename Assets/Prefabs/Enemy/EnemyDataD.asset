@@ -14,6 +14,6 @@ MonoBehaviour:
   m_label: D
   m_sightRadius: 100
   m_shootingIntervalSec: 1.2
-  m_projectileSpeed: 100
+  m_projectileSpeed: 250
   m_projectilePrefab: {fileID: 114135810275917464, guid: 10b901c7d6ff0a342914da7bbfa14bf2,
     type: 2}
