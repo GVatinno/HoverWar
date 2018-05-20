@@ -11,7 +11,6 @@ public class FollowBehaviour : MonoBehaviour
 
 	Vector3 m_prevPosition = Vector3.zero;
 	Quaternion m_prevRotation = Quaternion.identity;
-	Vector3 m_velocity = Vector3.zero;
 
 	void LateUpdate() {
 

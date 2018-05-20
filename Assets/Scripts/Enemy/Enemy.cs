@@ -5,17 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	[SerializeField]
-	string m_label = "";
-	[SerializeField]
-	float m_sightRadius = 10.0f;
-	[SerializeField]
-	float m_shootingIntervalSec = 2.0f;
-	[SerializeField]
-	float m_projectileSpeed = 100.0f;
+	EnemyData m_data;
 	[SerializeField]
 	GameObject m_shootingHead = null;
-	[SerializeField]
-	Projectile m_projectilePrefab = null;
 
 	Collider m_Collider;
 	WaitForSeconds m_waitForShootingIterval;
@@ -23,11 +15,10 @@ public class Enemy : MonoBehaviour {
 	int m_playerAndGroundLayerMask = 0;
 	bool m_enemyBehindPlayerCamera = false;
 
-	// TODO DO LAYER MASK ENUM
 
 	public string label
 	{
-		get { return m_label; }
+		get { return m_data.m_label; }
 	}
 
 	public Vector3 centerPoint
@@ -42,9 +33,9 @@ public class Enemy : MonoBehaviour {
 
 	void Awake()
 	{
-		m_sightRadiusSqr = m_sightRadius * m_sightRadius ;
+		m_sightRadiusSqr = m_data.m_sightRadius * m_data.m_sightRadius ;
 		m_Collider = GetComponent<Collider> ();
-		m_waitForShootingIterval = new WaitForSeconds (m_shootingIntervalSec);
+		m_waitForShootingIterval = new WaitForSeconds (m_data.m_shootingIntervalSec);
 		m_playerAndGroundLayerMask = (1 << LayerMask.NameToLayer ("Ground")) | (1 << LayerMask.NameToLayer ("Player"));
 		MessageBus.Instance.OnPlayerCameraMoved += CheckEnemBehindPlayerCamera;
 		EnemyManager.Instance.RegisterEnemy (this);
@@ -67,7 +58,7 @@ public class Enemy : MonoBehaviour {
 	{
 		if (m_Collider != null) {
 			Gizmos.color = Color.cyan;
-			Gizmos.DrawWireSphere (centerPoint, m_sightRadius);
+			Gizmos.DrawWireSphere (centerPoint, m_data.m_sightRadius);
 		}
 	}
 
@@ -113,10 +104,10 @@ public class Enemy : MonoBehaviour {
 		ComputePredictPlayerPosition (out predictedPosition);
 
 		// TODO swap for a pool
-		Projectile projectile = Instantiate<Projectile>(m_projectilePrefab);
+		Projectile projectile = Instantiate<Projectile>(m_data.m_projectilePrefab);
 		Vector3 origin = m_shootingHead.transform.position;
 
-		projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_projectileSpeed  );
+		projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_data.m_projectileSpeed  );
 	}
 
 	void ComputePredictPlayerPosition(out Vector3 predictedPlayerPosition)
@@ -132,7 +123,7 @@ public class Enemy : MonoBehaviour {
 		Vector3 P = player.transform.position;
 		Vector3 E = m_shootingHead.transform.position;
 		Vector3 V = playerRigidBody.velocity;
-		float s = m_projectileSpeed;
+		float s = m_data.m_projectileSpeed;
 		Vector3 W = P - E;
 
 		// which become a quadratic equation t^2V*V + 2W*V + W*W = st^2

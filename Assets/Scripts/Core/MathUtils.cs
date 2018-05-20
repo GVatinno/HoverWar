@@ -16,7 +16,7 @@ public class MathUtils
 		}
 		// one solution
 		if (discriminant == 0.0f) {
-			t0 = t1 = -b / a * 0.5f;
+			t0 = t1 = -b * 0.5f / a ;
 			return true;
 		}
 		// two solutions
