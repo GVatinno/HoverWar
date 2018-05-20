@@ -11,14 +11,18 @@ public class Damaging : MonoBehaviour {
 	public void Damage(GameObject obj)
 	{
 		Damageable damageable = obj.GetComponent<Damageable> ();
+		if (!addDamage (damageable)) {
+			damageable = obj.GetComponentInParent<Damageable> ();
+			addDamage (damageable);
+		}
+	}
+
+	bool addDamage( Damageable damageable )
+	{
 		if (damageable != null) {
 			damageable.AddDamage (m_damage);
+			return true;
 		}
-		else {
-			damageable = obj.GetComponentInParent<Damageable> ();
-			if (damageable != null){
-					damageable.AddDamage (m_damage);
-			}
-		}
+		return false;
 	}
 }
