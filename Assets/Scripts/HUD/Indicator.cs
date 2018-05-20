@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
-public class IntrestingPoint : MonoBehaviour {
+public class Indicator : MonoBehaviour {
 
 
 
@@ -16,6 +16,12 @@ public class IntrestingPoint : MonoBehaviour {
 	{
 		m_rectTransfrom = GetComponent<RectTransform> ();
 		m_canvasRectTransfrom = this.transform.parent.GetComponent<RectTransform> ();
+		MessageBus.Instance.OnPlayerCameraMoved += OnUpdateIntrestingPointPositionUpdated;
+	}
+
+	void OnDestroy()
+	{
+		MessageBus.Instance.OnPlayerCameraMoved -= OnUpdateIntrestingPointPositionUpdated;
 	}
 
 	public void Init(Vector3 worldPosition)
@@ -37,9 +43,8 @@ public class IntrestingPoint : MonoBehaviour {
 			Vector2 screenPos = playerCamera.WorldToScreenPoint (m_worldPosition);
 			screenPos.x = Mathf.Clamp (screenPos.x, 0.0f, Screen.width);
 			screenPos.y = Mathf.Clamp (screenPos.y, 0.0f, Screen.height);
-			Vector2 localPos = Vector2.zero;
-			RectTransformUtility.ScreenPointToLocalPointInRectangle (m_canvasRectTransfrom, screenPos, null, out localPos);
-			m_rectTransfrom.anchoredPosition = localPos;
+			RectTransformUtility.ScreenPointToLocalPointInRectangle (m_canvasRectTransfrom, screenPos, null, out screenPos);
+			m_rectTransfrom.anchoredPosition = screenPos;
 		}
 	}
 

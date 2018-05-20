@@ -632,9 +632,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91d34574d5cdeb49992bc6510c4e468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_intrestingPointPrefab: {fileID: 114198798453609306, guid: 35e9e68300944764e8324e9602363b9b,
+  m_intrestingPointPrefab: {fileID: 114356165665949228, guid: 35e9e68300944764e8324e9602363b9b,
     type: 2}
-  m_targetLockPrefab: {fileID: 114422252419694636, guid: bda6c1c4364cfd84ba91ee998728e74c,
+  m_targetLockPrefab: {fileID: 114715237642128958, guid: bda6c1c4364cfd84ba91ee998728e74c,
     type: 2}
 --- !u!1 &1596299825
 GameObject:

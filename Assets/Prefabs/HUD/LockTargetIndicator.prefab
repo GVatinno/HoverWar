@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 224153217983572752}
   - component: {fileID: 222405288102413126}
   - component: {fileID: 114422252419694636}
+  - component: {fileID: 114715237642128958}
   m_Layer: 5
   m_Name: LockTargetIndicator
   m_TagString: Untagged
@@ -88,6 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96af45947dd79c46abb522bdd06a6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rectTransfrom: {fileID: 0}
+  m_canvasRectTransfrom: {fileID: 0}
+  m_worldPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114435172531770934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +146,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 1
+--- !u!114 &114715237642128958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817537335588562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de602cc4f3cb9c439261303b78c88a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222090676836208660
 CanvasRenderer:
   m_ObjectHideFlags: 1

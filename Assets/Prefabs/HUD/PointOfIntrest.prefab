@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224997602928364540}
   - component: {fileID: 114198798453609306}
+  - component: {fileID: 114356165665949228}
   m_Layer: 5
   m_Name: PointOfIntrest
   m_TagString: Untagged
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.553}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.722}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -114,6 +115,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b96af45947dd79c46abb522bdd06a6d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rectTransfrom: {fileID: 0}
+  m_canvasRectTransfrom: {fileID: 0}
+  m_worldPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &114356165665949228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123239683783836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de602cc4f3cb9c439261303b78c88a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114489907962682658
@@ -210,7 +225,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.000015258789}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224261842433825394
 RectTransform:
@@ -246,7 +261,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 25, y: 25}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224997602928364540
 RectTransform:

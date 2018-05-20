@@ -6,74 +6,62 @@ public class HudController : MonoBehaviour {
 
 	// Rename intresting point script to HUDindicator
 	[SerializeField]
-	IntrestingPoint m_intrestingPointPrefab = null;
+	Indicator m_intrestingPointPrefab = null;
 	[SerializeField]
-	IntrestingPoint m_targetLockPrefab = null;
+	Indicator m_targetLockPrefab = null;
 
-	Dictionary<int, IntrestingPoint> m_intresingPointDict = new Dictionary<int, IntrestingPoint>();
+	Dictionary<int, Indicator> m_indicator = new Dictionary<int, Indicator>();
 	int m_targetLockInstanceId = 0;
-	// TODO perhaps find a way to update only on event
-	// Add destruction
 
 	void Awake () {
 		MessageBus.Instance.OnEnemyCreated += OnEnemyCreated;
 		MessageBus.Instance.OnEnemyChangedVisibility += OnEnemyChangedVisibility;
-		MessageBus.Instance.OnPlayerCameraMoved += OnPlayerCameraMoved;
 		MessageBus.Instance.OnTargetLockedChanged += OnTargetLockedChanged;
 	}
 
 	void Start()
 	{
 		// instanciate target look and put it invisible
-		IntrestingPoint point = Instantiate<IntrestingPoint>(m_targetLockPrefab, this.transform, false);
+		Indicator point = Instantiate<Indicator>(m_targetLockPrefab, this.transform, false);
 		point.name = "TargetLock";
 		point.Init (Vector3.zero);
-		m_intresingPointDict[point.GetInstanceID()] = point;
+		m_indicator[point.GetInstanceID()] = point;
 		point.SetActive (false);
 		m_targetLockInstanceId = point.GetInstanceID ();
-	}
-
-	void OnPlayerCameraMoved()
-	{
-		foreach(KeyValuePair<int, IntrestingPoint> entry in m_intresingPointDict)
-		{
-			entry.Value.OnUpdateIntrestingPointPositionUpdated ();
-		}
 	}
 
 	void OnDestroy()
 	{
 		MessageBus.Instance.OnEnemyCreated -= OnEnemyCreated;
 		MessageBus.Instance.OnEnemyChangedVisibility -= OnEnemyChangedVisibility;
-		MessageBus.Instance.OnPlayerCameraMoved -= OnPlayerCameraMoved;
 	}
 		
 
 	void OnEnemyCreated(Enemy enemy)
 	{
-		IntrestingPoint point = Instantiate<IntrestingPoint>(m_intrestingPointPrefab, this.transform, false);
+		Indicator point = Instantiate<Indicator>(m_intrestingPointPrefab, this.transform, false);
 		point.Init (enemy.centerPoint, enemy.label);
-		m_intresingPointDict[enemy.GetInstanceID()] = point;
+		m_indicator[enemy.GetInstanceID()] = point;
 	}
 
 	void OnEnemyDestroyed(Enemy enemy)
 	{
-		IntrestingPoint point = m_intresingPointDict [enemy.GetInstanceID ()];
-		m_intresingPointDict.Remove (enemy.GetInstanceID ());
+		Indicator point = m_indicator [enemy.GetInstanceID ()];
+		m_indicator.Remove (enemy.GetInstanceID ());
 		Destroy (point.gameObject);
 	}
 
 	void OnEnemyChangedVisibility(Enemy enemy, bool visibility)
 	{
-		m_intresingPointDict [enemy.GetInstanceID ()].SetActive (visibility);
+		m_indicator [enemy.GetInstanceID ()].SetActive (visibility);
 		if (enemy == TargetLockManager.Instance.currentTarget) {
-			m_intresingPointDict [m_targetLockInstanceId].SetActive (visibility);
+			m_indicator [m_targetLockInstanceId].SetActive (visibility);
 		}
 	}
 
 	void OnTargetLockedChanged(Enemy enemy)
 	{
-		IntrestingPoint point = m_intresingPointDict [m_targetLockInstanceId];
+		Indicator point = m_indicator [m_targetLockInstanceId];
 		if (enemy == null) {
 			point.Init (Vector3.zero);
 			point.SetActive (false);

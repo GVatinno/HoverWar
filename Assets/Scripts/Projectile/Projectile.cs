@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(TrailRenderer))]
 public class Projectile : MonoBehaviour {
 
+	[SerializeField]
+	float m_forceImpactMultiplier = 10.0f;
 	Vector3 m_velocity = Vector3.zero;
 
 	public void Init( Vector3 origin, Vector3 direction, float speed )
@@ -21,7 +23,7 @@ public class Projectile : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		GameObject player = PlayerManager.Instance.GetPlayer ();
 		if (other.tag == player.tag) {
-			other.attachedRigidbody.AddForceAtPosition (m_velocity * 10.0f, other.ClosestPoint(this.transform.position), ForceMode.Impulse);
+			other.attachedRigidbody.AddForceAtPosition (m_velocity * m_forceImpactMultiplier, other.ClosestPoint(this.transform.position), ForceMode.Impulse);
 		}
 		Destroy(this.gameObject);
 	}

@@ -6,7 +6,7 @@ public class Missile : MonoBehaviour {
 
 	[SerializeField]
 	float m_selfGuidanceActivationDistance = 10.0f;
-	float m_selfGuidanceActivationDistanceSqrd = 10.0f;
+	float m_selfGuidanceActivationDistanceSqrd = 0.0f;
 	TrailRenderer m_trailRenderer;
 	bool m_selfGuidanceActivated = false;
 	Vector3 m_target = Vector3.zero;
@@ -25,17 +25,26 @@ public class Missile : MonoBehaviour {
 		m_target = target;
 		m_origin = origin;
 		m_selfGuidanceActivationDistanceSqrd = m_selfGuidanceActivationDistance * m_selfGuidanceActivationDistance;
+		StartCoroutine (ActivateTrailAfterDistance ());
 	}
 
-	void Update()
+	IEnumerator ActivateTrailAfterDistance()
 	{
-		if ( ! m_selfGuidanceActivated) {
+		yield return new WaitUntil ( () => {
 			if ((this.transform.position - m_origin).sqrMagnitude > m_selfGuidanceActivationDistanceSqrd) {
-
 				m_selfGuidanceActivated = true;
 				m_trailRenderer.enabled = true;
+				return true;
 			}
-		}
+			return false;
+		});
+	
+		
+	}
+
+	void OnDestroy()
+	{
+		StopAllCoroutines ();
 	}
 
 	void FixedUpdate () {
