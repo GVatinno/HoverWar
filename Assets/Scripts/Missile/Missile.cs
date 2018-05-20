@@ -25,7 +25,16 @@ public class Missile : MonoBehaviour {
 		m_target = target;
 		m_origin = origin;
 		m_selfGuidanceActivationDistanceSqrd = m_selfGuidanceActivationDistance * m_selfGuidanceActivationDistance;
+	}
+
+	void OnEnable()
+	{
 		StartCoroutine (ActivateTrailAfterDistance ());
+	}
+
+	void OnDisable()
+	{
+		StopAllCoroutines ();
 	}
 
 	IEnumerator ActivateTrailAfterDistance()
@@ -60,6 +69,6 @@ public class Missile : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider other) {
-		Destroy(this.gameObject);
+		PoolManager.Instance.returnPoolElement (PoolManager.PoolType.MISSILE, this.gameObject);
 	}
 }

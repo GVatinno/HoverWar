@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour {
 		if (other.tag == player.tag) {
 			other.attachedRigidbody.AddForceAtPosition (m_velocity * m_forceImpactMultiplier, other.ClosestPoint(this.transform.position), ForceMode.Impulse);
 		}
-		Destroy(this.gameObject);
+		PoolManager.Instance.returnPoolElement (PoolManager.PoolType.PROJECTILE, this.gameObject);
 	}
 
 }

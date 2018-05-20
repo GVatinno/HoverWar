@@ -45,12 +45,16 @@ public class HovercraftController : MonoBehaviour {
 	void ShootMissile()
 	{
 		if (TargetLockManager.Instance.hasCurrentTarget) {
-			Missile missile = Instantiate<Missile> (m_data.m_missilePrefab);
-			missile.Init (
-				m_missileSource.transform.position, 
-				m_missileSource.transform.forward,
-				TargetLockManager.Instance.currentTarget.centerPoint,
-				m_data.m_missileSpeed);
+			GameObject missileGameObject = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.MISSILE);
+			if (missileGameObject != null) {
+				Missile missile = missileGameObject.GetComponent<Missile> ();
+				missile.Init (
+					m_missileSource.transform.position, 
+					m_missileSource.transform.forward,
+					TargetLockManager.Instance.currentTarget.centerPoint,
+					m_data.m_missileSpeed);
+				missileGameObject.SetActive (true);
+			}
 		}
 	}
 }

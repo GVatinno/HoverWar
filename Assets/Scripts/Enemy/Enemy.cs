@@ -101,12 +101,13 @@ public class Enemy : MonoBehaviour {
 		Vector3 predictedPosition = Vector3.zero;
 		ComputePredictPlayerPosition (out predictedPosition);
 
-
-		// TODO swap for a pool
-		Projectile projectile = Instantiate<Projectile>(m_data.m_projectilePrefab);
-		Vector3 origin = m_shootingHead.transform.position;
-
-		projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_data.m_projectileSpeed  );
+		GameObject projectileGameObject = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.PROJECTILE);
+		if (projectileGameObject != null) {
+			Projectile projectile = projectileGameObject.GetComponent<Projectile> ();
+			Vector3 origin = m_shootingHead.transform.position;
+			projectile.Init (m_shootingHead.transform.position, (predictedPosition - origin).normalized, m_data.m_projectileSpeed);
+			projectileGameObject.SetActive (true);
+		}
 	}
 
 	void ComputePredictPlayerPosition(out Vector3 predictedPlayerPosition)
