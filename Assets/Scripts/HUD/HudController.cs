@@ -31,15 +31,23 @@ public class HudController : MonoBehaviour {
 		// instanciate target look and put it invisible
 		Indicator point = Instantiate<Indicator>(m_targetLockPrefab, this.transform, false);
 		point.name = "TargetLock";
-		point.Init (Vector3.zero);
+		point.SetPosition (Vector3.zero);
 		m_indicator[point.GetInstanceID()] = point;
 		point.SetActive (false);
 		m_targetLockInstanceId = point.GetInstanceID ();
-		Indicator playerHealth = Instantiate<Indicator>(m_healthIndicatorPrefab, this.transform, false);
-		playerHealth.name = "HealthIndicators";
+
 		GameObject player = PlayerManager.Instance.GetPlayer ();
-		m_healthIndicators [player.GetInstanceID ()] = playerHealth;
-		playerHealth.Init (player.transform.position, player.GetComponent<Damageable>().m_health.ToString());
+		Indicator playerIndicator = CreateIndicatorIn(m_healthIndicators, m_healthIndicatorPrefab, player.transform.position, player.GetInstanceID () );
+		playerIndicator.SetLabel(player.GetComponent<Damageable>().m_health.ToString());
+				
+	}
+
+	Indicator CreateIndicatorIn(Dictionary<int, Indicator> dic, Indicator prefab, Vector3 position, int id)
+	{
+		Indicator indicator = Instantiate<Indicator>(prefab, this.transform, false);
+		dic [id] = indicator;
+		indicator.SetPosition (position);
+		return indicator;
 	}
 
 	void OnDestroy()
@@ -55,7 +63,9 @@ public class HudController : MonoBehaviour {
 
 	void OnEntityDamaged(GameObject obj, float health)
 	{
-		m_healthIndicators [obj.GetInstanceID ()].Init (obj.transform.position, health.ToString());
+		Indicator indicator = m_healthIndicators [obj.GetInstanceID ()];
+		indicator.SetPosition (obj.transform.position);
+		indicator.SetLabel (health.ToString ());
 	}
 
 	void OnUpdatePlayerIndicator()
@@ -63,33 +73,35 @@ public class HudController : MonoBehaviour {
 		GameObject player = PlayerManager.Instance.GetPlayer ();
 		if ( m_healthIndicators.ContainsKey(player.GetInstanceID () ))
 		{
-			m_healthIndicators [player.GetInstanceID ()].Init (player.transform.position);
+			m_healthIndicators [player.GetInstanceID ()].SetPosition (player.transform.position);
 		}
 	}
 		
 
 	void OnEnemyCreated(Enemy enemy)
 	{
-		Indicator point = Instantiate<Indicator>(m_intrestingPointPrefab, this.transform, false);
-		point.Init (enemy.centerPoint, enemy.label);
-		m_indicator[enemy.gameObject.GetInstanceID()] = point;
-		Indicator health = Instantiate<Indicator>(m_healthIndicatorPrefab, this.transform, false);
-		health.Init (enemy.centerPoint, enemy.GetComponent<Damageable>().m_health.ToString());
-		m_healthIndicators[enemy.gameObject.GetInstanceID()] = health;
+		Indicator enemyIndicator = CreateIndicatorIn(m_indicator, m_intrestingPointPrefab, enemy.centerPoint, enemy.gameObject.GetInstanceID() );
+		enemyIndicator.SetLabel ( enemy.label);
+
+		Indicator health =	CreateIndicatorIn(m_healthIndicators, m_healthIndicatorPrefab, enemy.centerPoint, enemy.gameObject.GetInstanceID() );
+		health.SetLabel (enemy.GetComponent<Damageable>().m_health.ToString());
+	}
+
+	void DestroyIndicator(Dictionary<int, Indicator> dic, int id)
+	{
+		Indicator point = dic [id];
+		dic.Remove (id);
+		Destroy (point.gameObject);
 	}
 
 	void OnEnemyDestroyed(Enemy enemy)
 	{
-		Indicator point = m_indicator [enemy.gameObject.GetInstanceID()];
-		m_indicator.Remove (enemy.gameObject.GetInstanceID());
-		Destroy (point.gameObject);
+		DestroyIndicator (m_indicator, enemy.gameObject.GetInstanceID ());
 	}
 
 	void OnEntityDestroyed(GameObject obj)
 	{
-		Indicator health = m_healthIndicators [obj.GetInstanceID()];
-		m_healthIndicators.Remove (obj.GetInstanceID());
-		Destroy (health.gameObject);
+		DestroyIndicator (m_healthIndicators, obj.GetInstanceID());
 	}
 
 	void OnEnemyChangedVisibility(Enemy enemy, bool visibility)
@@ -105,11 +117,11 @@ public class HudController : MonoBehaviour {
 	{
 		Indicator point = m_indicator [m_targetLockInstanceId];
 		if (enemy == null) {
-			point.Init (Vector3.zero);
+			point.SetPosition (Vector3.zero);
 			point.SetActive (false);
 		}
 		else {
-			point.Init (enemy.centerPoint);
+			point.SetPosition (enemy.centerPoint);
 			point.SetActive (true);
 		}
 	}

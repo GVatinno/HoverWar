@@ -24,14 +24,13 @@ public class Indicator : MonoBehaviour {
 		MessageBus.Instance.OnPlayerCameraMoved -= OnUpdateIntrestingPointPositionUpdated;
 	}
 
-	public void Init(Vector3 worldPosition)
+	public void SetPosition(Vector3 worldPosition)
 	{
 		m_worldPosition = worldPosition;
 	}
 
-	public void Init(Vector3 worldPosition, string label)
+	public void SetLabel(string label)
 	{
-		Init (worldPosition);
 		GetComponentInChildren<Text> ().text = label;
 	}
 
