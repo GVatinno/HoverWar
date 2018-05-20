@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour {
 	float m_sightRadiusSqr = 0.0f;
 	bool m_enemyBehindPlayerCamera = false;
 
-
 	public string label
 	{
 		get { return m_data.m_label; }
@@ -96,11 +95,16 @@ public class Enemy : MonoBehaviour {
 		return true;
 	}
 
+	void Update()
+	{
+		
+	}
+
 	void ShootProjectile()
 	{
 		Vector3 predictedPosition = Vector3.zero;
 		ComputePredictPlayerPosition (out predictedPosition);
-
+		OrientHeadToPosition (predictedPosition);
 		GameObject projectileGameObject = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.PROJECTILE);
 		if (projectileGameObject != null) {
 			Projectile projectile = projectileGameObject.GetComponent<Projectile> ();
@@ -157,6 +161,13 @@ public class Enemy : MonoBehaviour {
 			MessageBus.Instance.OnEnemyChangedVisibility (this, !enemyBehindCamera);
 		}
 		m_enemyBehindPlayerCamera = enemyBehindCamera;
+		if ( !m_enemyBehindPlayerCamera )
+			OrientHeadToPosition (PlayerManager.Instance.GetPlayer ().transform.position);
+	}
+
+	void OrientHeadToPosition(Vector3 position)
+	{
+		m_shootingHead.transform.LookAt(position );
 	}
 
 
