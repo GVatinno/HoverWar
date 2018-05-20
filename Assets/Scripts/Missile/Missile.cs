@@ -12,9 +12,10 @@ public class Missile : MonoBehaviour {
 	Vector3 m_target = Vector3.zero;
 	Vector3 m_origin = Vector3.zero;
 	float m_speed = 0.0f;
+	float m_chasingSpeed = 0.0f;
 	Vector3 m_velocity = Vector3.zero;
 
-	public void Init( Vector3 origin, Vector3 direction, Vector3 target,  float speed )
+	public void Init( Vector3 origin, Vector3 direction, Vector3 target,  float speed, float chasingSpeed )
 	{
 		this.transform.rotation = Quaternion.FromToRotation (this.transform.forward, direction);
 		this.transform.position = origin;
@@ -24,6 +25,7 @@ public class Missile : MonoBehaviour {
 		m_speed = speed;
 		m_target = target;
 		m_origin = origin;
+		m_chasingSpeed = chasingSpeed;
 		m_selfGuidanceActivationDistanceSqrd = m_selfGuidanceActivationDistance * m_selfGuidanceActivationDistance;
 	}
 
@@ -61,7 +63,7 @@ public class Missile : MonoBehaviour {
 			this.transform.rotation = Quaternion.RotateTowards (
 				this.transform.rotation,
 				Quaternion.LookRotation (m_target - this.transform.position),
-				Time.fixedDeltaTime * m_speed);
+				Time.fixedDeltaTime * m_chasingSpeed);
 		}
 		this.transform.position += this.transform.forward * m_speed  * Time.fixedDeltaTime;
 	}
@@ -70,5 +72,11 @@ public class Missile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		PoolManager.Instance.returnPoolElement (PoolManager.PoolType.MISSILE, this.gameObject);
+		GameObject explosion = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.EXPLOSION);
+		if (explosion) {
+			explosion.transform.position = this.transform.position;
+			explosion.SetActive (true);
+		}
+
 	}
 }

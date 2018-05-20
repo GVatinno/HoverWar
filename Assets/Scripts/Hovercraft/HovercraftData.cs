@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HovercraftData", menuName = "Data/HovercraftData")]
 public class HovercraftData : ScriptableObject {
 	[SerializeField]
-	public float m_missileSpeed = 100.0f;
+	public float m_missileSpeed = 40.0f;
+	[SerializeField]
+	public float m_missileChasingSpeed = 60.0f;
 	[SerializeField]
 	public float m_moveForceFactor = 7000.0f;
 	[SerializeField]

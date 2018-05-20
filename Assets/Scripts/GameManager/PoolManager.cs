@@ -7,11 +7,13 @@ public sealed class PoolManager : MonoBehaviour {
 	public enum PoolType
 	{
 		PROJECTILE = 0,
-		MISSILE = 1
+		MISSILE = 1,
+		EXPLOSION = 2,
+		HIT = 3
 	}
 
 	[SerializeField]
-	MonoPool[] m_pools;
+	MonoPool[] m_pools = null;
 
 	public static PoolManager Instance = null;
 

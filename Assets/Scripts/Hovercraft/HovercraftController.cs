@@ -52,7 +52,8 @@ public class HovercraftController : MonoBehaviour {
 					m_missileSource.transform.position, 
 					m_missileSource.transform.forward,
 					TargetLockManager.Instance.currentTarget.centerPoint,
-					m_data.m_missileSpeed);
+					m_data.m_missileSpeed,
+					m_data.m_missileChasingSpeed);
 				missileGameObject.SetActive (true);
 			}
 		}

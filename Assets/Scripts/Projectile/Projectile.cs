@@ -26,6 +26,11 @@ public class Projectile : MonoBehaviour {
 			other.attachedRigidbody.AddForceAtPosition (m_velocity * m_forceImpactMultiplier, other.ClosestPoint(this.transform.position), ForceMode.Impulse);
 		}
 		PoolManager.Instance.returnPoolElement (PoolManager.PoolType.PROJECTILE, this.gameObject);
+		GameObject hit = PoolManager.Instance.GetPoolElement (PoolManager.PoolType.HIT);
+		if (hit) {
+			hit.transform.position = this.transform.position;
+			hit.SetActive (true);
+		}
 	}
 
 }
