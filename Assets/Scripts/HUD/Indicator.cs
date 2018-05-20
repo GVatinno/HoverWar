@@ -11,6 +11,7 @@ public class Indicator : MonoBehaviour {
 	RectTransform m_rectTransfrom = null;
 	RectTransform m_canvasRectTransfrom = null;
 	Vector3 m_worldPosition = Vector3.zero;
+	float m_screenMargin = 10.0f;
 
 	void Awake()
 	{
@@ -39,8 +40,8 @@ public class Indicator : MonoBehaviour {
 		if (this.isActiveAndEnabled) {
 			Camera playerCamera = PlayerManager.Instance.GetPlayerCamera ();
 			Vector2 screenPos = playerCamera.WorldToScreenPoint (m_worldPosition);
-			screenPos.x = Mathf.Clamp (screenPos.x, 0.0f, Screen.width);
-			screenPos.y = Mathf.Clamp (screenPos.y, 0.0f, Screen.height);
+			screenPos.x = Mathf.Clamp (screenPos.x, m_screenMargin, Screen.width -m_screenMargin);
+			screenPos.y = Mathf.Clamp (screenPos.y, m_screenMargin, Screen.height -m_screenMargin);
 			RectTransformUtility.ScreenPointToLocalPointInRectangle (m_canvasRectTransfrom, screenPos, null, out screenPos);
 			m_rectTransfrom.anchoredPosition = screenPos;
 		}
