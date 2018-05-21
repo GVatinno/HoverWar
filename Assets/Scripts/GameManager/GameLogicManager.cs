@@ -36,6 +36,8 @@ public class GameLogicManager : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
+		if (Input.GetKeyDown (KeyCode.R))
+			SceneManager.LoadScene ("HoverWar");
 	}
 	
 

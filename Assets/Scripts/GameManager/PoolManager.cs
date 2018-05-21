@@ -20,11 +20,6 @@ public sealed class PoolManager : MonoBehaviour {
 	void Awake () {
 		if (Instance == null) {
 			Instance = this;
-			DontDestroyOnLoad (this.gameObject);
-		}
-		else {
-			Debug.Assert (false,"Trying to recreate this singleton");
-			Destroy (this.gameObject);
 		}
 	}
 	

@@ -25,7 +25,6 @@ public sealed class PlayerManager
 
 	private PlayerManager()
 	{
-		m_playerCamera = Camera.main;
 	}
 
 	public GameObject GetPlayer ()
@@ -50,11 +49,13 @@ public sealed class PlayerManager
 	{
 		m_player = player;
 		m_playerRigidBody = player.GetComponent<Rigidbody> ();
+		m_playerCamera = Camera.main;
 	}
 
 	public void UnRegisterPlayer()
 	{
 		m_player = null;
+		m_playerCamera = null;
 	}
 
 
