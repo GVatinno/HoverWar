@@ -5,10 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameLogicManager : MonoBehaviour {
 
-	[SerializeField]
-	GameObject m_win = null;
-	[SerializeField]
-	GameObject m_lose = null;
+
 
 	int m_enemyCount = 0;
 	int m_enemyCounter = 0;
@@ -16,23 +13,21 @@ public class GameLogicManager : MonoBehaviour {
 		MessageBus.Instance.OnEntityDead += OnEntityDead;
 		m_enemyCount = EnemyManager.Instance.GetEnemies ().Count;
 		m_enemyCounter = 0;
-		m_win.SetActive (false);
-		m_lose.SetActive (false);
+
 	}
 
 	void OnEntityDead( GameObject obj )
 	{
 		if (obj.tag == "Player") {
 			// lost
-			m_lose.SetActive(true);
+			MessageBus.Instance.OnGameLost();
 		}
 		else
 		if (obj.tag == "Enemy") {
 			++m_enemyCounter;
 			if (m_enemyCounter >= m_enemyCount) {
-				// won
-				m_win.SetActive(true);
-				
+			// won
+				MessageBus.Instance.OnGameWon();
 			}
 		}
 	}

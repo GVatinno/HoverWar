@@ -10,6 +10,7 @@ public class Indicator : MonoBehaviour {
 
 	RectTransform m_rectTransfrom = null;
 	RectTransform m_canvasRectTransfrom = null;
+	Text m_textComponent = null;
 	Vector3 m_worldPosition = Vector3.zero;
 	float m_screenMargin = 10.0f;
 
@@ -17,6 +18,7 @@ public class Indicator : MonoBehaviour {
 	{
 		m_rectTransfrom = GetComponent<RectTransform> ();
 		m_canvasRectTransfrom = this.transform.parent.GetComponent<RectTransform> ();
+		m_textComponent = GetComponentInChildren<Text> ();
 		MessageBus.Instance.OnPlayerCameraMoved += OnUpdateIntrestingPointPositionUpdated;
 	}
 
@@ -32,7 +34,9 @@ public class Indicator : MonoBehaviour {
 
 	public void SetLabel(string label)
 	{
-		GetComponentInChildren<Text> ().text = label;
+		if (m_textComponent) {
+			m_textComponent.text = label;
+		}
 	}
 
 	public void OnUpdateIntrestingPointPositionUpdated()

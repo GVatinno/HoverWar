@@ -11,6 +11,10 @@ public class HudController : MonoBehaviour {
 	Indicator m_targetLockPrefab = null;
 	[SerializeField]
 	Indicator m_healthIndicatorPrefab = null;
+	[SerializeField]
+	GameObject m_win = null;
+	[SerializeField]
+	GameObject m_lose = null;
 
 	Dictionary<int, Indicator> m_indicator = new Dictionary<int, Indicator>();
 	Dictionary<int, Indicator> m_healthIndicators = new Dictionary<int, Indicator>();
@@ -24,6 +28,8 @@ public class HudController : MonoBehaviour {
 		MessageBus.Instance.OnPlayerCameraMoved += OnUpdatePlayerIndicator;
 		MessageBus.Instance.OnEntityDamaged += OnEntityDamaged;
 		MessageBus.Instance.OnEntityDead += OnEntityDestroyed;
+		MessageBus.Instance.OnGameWon += OnGameWon;
+		MessageBus.Instance.OnGameLost += OnGameLost;
 	}
 
 	void Start()
@@ -39,7 +45,9 @@ public class HudController : MonoBehaviour {
 		GameObject player = PlayerManager.Instance.GetPlayer ();
 		Indicator playerIndicator = CreateIndicatorIn(m_healthIndicators, m_healthIndicatorPrefab, player.transform.position, player.GetInstanceID () );
 		playerIndicator.SetLabel(player.GetComponent<Damageable>().m_health.ToString());
-				
+
+		m_win.SetActive (false);
+		m_lose.SetActive (false);
 	}
 
 	Indicator CreateIndicatorIn(Dictionary<int, Indicator> dic, Indicator prefab, Vector3 position, int id)
@@ -59,6 +67,8 @@ public class HudController : MonoBehaviour {
 		MessageBus.Instance.OnPlayerCameraMoved -= OnUpdatePlayerIndicator;
 		MessageBus.Instance.OnEntityDamaged -= OnEntityDamaged;
 		MessageBus.Instance.OnEntityDead -= OnEntityDestroyed;
+		MessageBus.Instance.OnGameWon -= OnGameWon;
+		MessageBus.Instance.OnGameLost -= OnGameLost;
 	}
 
 	void OnEntityDamaged(GameObject obj, float health)
@@ -124,5 +134,15 @@ public class HudController : MonoBehaviour {
 			point.SetPosition (enemy.centerPoint);
 			point.SetActive (true);
 		}
+	}
+
+	void OnGameWon()
+	{
+		m_win.SetActive (true);
+	}
+
+	void OnGameLost()
+	{
+		m_lose.SetActive (true);
 	}
 }
